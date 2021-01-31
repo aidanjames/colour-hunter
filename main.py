@@ -30,17 +30,14 @@ def home():
 def upload():
     pic = request.files['pic']
     if not pic:
-        return 'No pic uploaded!', 400
-
+        return 'No pic uploaded', 400
     filename = secure_filename(pic.filename)
     mimetype = pic.mimetype
     if not filename or not mimetype:
-        return 'Bad upload!', 400
-
+        return 'Bad upload', 400
     img = Img(img=pic.read(), name=filename, mimetype=mimetype)
     db.session.add(img)
     db.session.commit()
-
     return redirect(url_for('analyse_colors', pic_id=img.id))
 
 
@@ -50,8 +47,8 @@ def analyse_colors(pic_id):
     img_converted = b64encode(img.img).decode("utf-8")
     if not img:
         return 'Img Not Found!', 404
-    chart_mgr = ColorManager()
-    colors = chart_mgr.get_colors(img.img, 10)
+    color_manager = ColorManager()
+    colors = color_manager.get_colors(img.img, 10)
     return render_template('colors.html', colors=colors, image=img_converted)
 
 
