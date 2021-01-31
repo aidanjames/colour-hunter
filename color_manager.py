@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 import cv2
 from collections import Counter

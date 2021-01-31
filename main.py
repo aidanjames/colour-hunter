@@ -51,7 +51,7 @@ def analyse_colors(pic_id):
     if not img:
         return 'Img Not Found!', 404
     chart_mgr = ColorManager()
-    colors = chart_mgr.get_colors(img.img, 8)
+    colors = chart_mgr.get_colors(img.img, 10)
     return render_template('colors.html', colors=colors, image=img_converted)
 
 
